@@ -7,16 +7,18 @@ An end-to-end **Machine Learning + Explainable AI dashboard** that predicts stud
 ## 🚀 Project Overview
 
 This system analyzes student data such as:
+
 - Study hours
 - Attendance
 - Assignment scores
 - Quiz performance
 
 …and predicts:
-- ✅ Pass / Fail outcome  
-- 📊 Probability of success  
-- ⚠️ Risk level (Low / Medium / High)  
-- 🧠 Personalized intervention suggestions  
+
+- ✅ Pass / Fail outcome
+- 📊 Probability of success
+- ⚠️ Risk level (Low / Medium / High)
+- 🧠 Personalized intervention suggestions
 
 ---
 
@@ -47,7 +49,6 @@ This system analyzes student data such as:
 
 ## 📂 Project Structure
 
-
 Student-Performance-Prediction/
 │
 ├── data/
@@ -59,13 +60,12 @@ Student-Performance-Prediction/
 ├── requirements.txt
 └── README.md
 
-
 ---
 
 ## ⚙️ Installation & Setup
 
 ```bash
-git clone 
+git clone
 cd Student-Performance-Prediction
 
 python -m venv venv
@@ -111,15 +111,4 @@ System generates risk level + interventions
 🎓 Universities → Identify at-risk students
 📚 EdTech → Personalized learning paths
 🏢 Corporate L&D → Training performance tracking
-
-🎯 Future Improvements
-PDF report generation
-Email alert system
-Model retraining pipeline
-Cloud deployment (AWS/GCP)
-
-
-👨‍💻 Author
-
-Sahil
-Engineering Student | Aspiring Data Scientist
+```

@@ -5,6 +5,8 @@ import shap
 import matplotlib.pyplot as plt
 
 from src.predict import predict_student
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 
 # Load model
 model = joblib.load("models/model.pkl")
@@ -79,10 +81,17 @@ with col1:
         "Impact": values
     }).sort_values(by="Impact", key=abs)
 
-    fig, ax = plt.subplots(figsize=(4, 3))
-    ax.barh(shap_df["Feature"], shap_df["Impact"])
-    ax.set_title("Feature Impact", fontsize=10)
-    ax.tick_params(labelsize=8)
+    fig, ax = plt.subplots(figsize=(5, 3))
+
+    ax.barh(
+        shap_df["Feature"],
+        shap_df["Impact"]
+    )
+
+    ax.axvline(0, color="black", linewidth=0.8)
+    ax.set_title("SHAP Impact on Pass Prediction")
+    ax.set_xlabel("SHAP Value")
+    ax.tick_params(labelsize=9)
 
     st.pyplot(fig, use_container_width=False)
 
@@ -154,14 +163,23 @@ st.markdown("---")
 st.markdown("### 📈 Model Overview")
 
 df = pd.read_csv("data/student_data.csv")
+
 X = df.drop(["pass", "final_score"], axis=1)
 y = df["pass"]
 
-preds = model.predict(X)
-accuracy = (preds == y).mean()
+_, X_test, _, y_test = train_test_split(
+    X, y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y
+)
+
+preds = model.predict(X_test)
+accuracy = accuracy_score(y_test, preds)
 
 m1, m2, m3 = st.columns(3)
-m1.metric("Accuracy", f"{accuracy:.2f}")
+
+m1.metric("Test Accuracy", f"{accuracy:.2f}")
 m2.metric("Dataset", len(df))
 m3.metric("Pass Rate", f"{y.mean():.2f}")
 
